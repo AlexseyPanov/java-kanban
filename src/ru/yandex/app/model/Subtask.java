@@ -1,3 +1,8 @@
+package ru.yandex.app.model;
+
+import ru.yandex.app.service.TaskStatus;
+import ru.yandex.app.service.TaskType;
+
 public class Subtask extends Task {
     public int epicId;
 
@@ -12,6 +17,10 @@ public class Subtask extends Task {
         this.taskType = taskType;
     }
 
+    public Subtask(int id, String name, String description, TaskStatus status, TaskType taskType) {
+        super();
+    }
+
     public int getEpicId() {
         return epicId;
     }
@@ -22,7 +31,7 @@ public class Subtask extends Task {
 
     @Override
     public String toString() {
-        return "Subtask{" +
+        return "ru.yandex.app.model.Subtask{" +
                 "epicId=" + epicId + ", id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +

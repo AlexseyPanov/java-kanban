@@ -1,3 +1,8 @@
+package ru.yandex.app.model;
+
+import ru.yandex.app.service.TaskStatus;
+import ru.yandex.app.service.TaskType;
+
 import java.util.Objects;
 
 public class Task {
@@ -64,7 +69,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task{" +
+        return "ru.yandex.app.model.Task{" +
                 "id='" + id + '\'' +
                 ", taskStatus=" + taskStatus + '\'' +
                 ", taskType=" + taskType + '\'' +

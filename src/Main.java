@@ -1,3 +1,6 @@
+import ru.yandex.app.service.TaskManager;
+import ru.yandex.app.service.TaskStatus;
+
 public class Main {
     public static void main(String[] args) {
         TaskManager manager = new TaskManager();

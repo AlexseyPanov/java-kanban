@@ -1,4 +1,9 @@
-import java.util.ArrayList;
+package ru.yandex.app.service;
+
+import ru.yandex.app.model.Epic;
+import ru.yandex.app.model.Subtask;
+import ru.yandex.app.model.Task;
+
 import java.util.HashMap;
 
 public class TaskManager {
