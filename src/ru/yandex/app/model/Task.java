@@ -6,20 +6,24 @@ import ru.yandex.app.service.TaskType;
 import java.util.Objects;
 
 public class Task {
-    protected int id = 0;
+
     protected String name;
     protected String description;
+    protected Integer id;
+    protected TaskStatus taskStatus = TaskStatus.NEW;
 
-    protected TaskStatus taskStatus;
-    protected TaskType taskType;
+    public Task(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
 
-    public Task(int id, String name, String description, TaskStatus taskStatus, TaskType taskType) {
+    public Task(int id, String name, String description, TaskStatus taskStatus) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.taskStatus = taskStatus;
-        this.taskType = taskType;
     }
+
 
     public String getName() {
         return name;
@@ -53,28 +57,30 @@ public class Task {
         this.id = id;
     }
 
+    public TaskType getTaskType() { return TaskType.TASK; }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Task task = (Task) o;
-        return id == task.id && Objects.equals(name, task.name) && Objects.equals(description, task.description)
-                && taskStatus.equals(task.taskStatus) && taskType.equals(task.taskType);
+        return Objects.equals(name, task.name) &&
+                Objects.equals(description, task.description) &&
+                Objects.equals(id, task.id) &&
+                Objects.equals(taskStatus, task.taskStatus);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, taskStatus, taskType, name, description);
+        return Objects.hash(name, description, id, taskStatus);
     }
 
     @Override
     public String toString() {
-        return "ru.yandex.app.model.Task{" +
-                "id='" + id + '\'' +
-                ", taskStatus=" + taskStatus + '\'' +
-                ", taskType=" + taskType + '\'' +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+        return "Задача{" +
+                "название='" + name + '\'' +
+                ", описание='" + description + '\'' +
+                ", id='" + id + '\'' +
+                ", статус='" + taskStatus + '\'';
     }
 }

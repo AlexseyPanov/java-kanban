@@ -3,40 +3,53 @@ package ru.yandex.app.model;
 import ru.yandex.app.service.TaskStatus;
 import ru.yandex.app.service.TaskType;
 
+import java.util.Objects;
+
 public class Subtask extends Task {
-    public int epicId;
+    private int epicId;
 
-    public Subtask(int id, String name, String description, TaskStatus taskStatus, TaskType taskType, int epicId) {
-        super(id, name, description, taskStatus, taskType);
+    public Subtask(int epicId, String name, String description) {
+        super(name, description);
         this.epicId = epicId;
-        this.taskType = taskType;
     }
 
-    public Subtask(int id, String name, String description, TaskStatus taskStatus, TaskType taskType) {
-        super(id, name, description, taskStatus, taskType);
-        this.taskType = taskType;
-    }
 
-    public Subtask(int id, String name, String description, TaskStatus status, TaskType taskType) {
-        super();
+
+    public Subtask(int id, String name, String description, TaskStatus taskStatus, int epicId) {
+        super(id, name, description, taskStatus);
+        this.epicId = epicId;
     }
 
     public int getEpicId() {
         return epicId;
     }
 
-    public void setEpicId(int epicId) {
-        this.epicId = epicId;
+    @Override
+    public TaskType getTaskType() {
+        return TaskType.SUB_TASK;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Subtask)) return false;
+        if (!super.equals(o)) return false;
+        Subtask subtask = (Subtask) o;
+        return getEpicId() == subtask.getEpicId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, description, id, taskStatus, epicId);
     }
 
     @Override
     public String toString() {
-        return "ru.yandex.app.model.Subtask{" +
-                "epicId=" + epicId + ", id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", taskStatus=" + taskStatus +
-                ", taskType=" + taskType +
-                '}';
+        return "Подзадача (Subtask) {" +
+                "название='" + name + '\'' +
+                ", описание='" + description + '\'' +
+                ", id='" + id + '\'' +
+                ", статус='" + taskStatus + '\'' +
+                ", id эпика='" + epicId + '}' + '\'';
     }
 }
