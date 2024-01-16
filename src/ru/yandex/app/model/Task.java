@@ -1,7 +1,6 @@
 package ru.yandex.app.model;
 
 import ru.yandex.app.service.TaskStatus;
-import ru.yandex.app.service.TaskType;
 
 import java.util.Objects;
 

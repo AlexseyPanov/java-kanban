@@ -25,7 +25,6 @@ public class TaskManager {
         }
         int id = getNextId();
         task.setId(id);
-        task.getTaskType();
         taskMap.put(id, task);
         return id;
     }
@@ -37,7 +36,6 @@ public class TaskManager {
         }
         int id = getNextId();
         epic.setId(id);
-        epic.getTaskType();
         epicMap.put(id, epic);
         checkEpicState(id);
         return id;
@@ -76,34 +74,10 @@ public class TaskManager {
         if (epic == null) {
             return -1;
         }
-        epicMap.put(epic.getId(), epic);
-        checkEpicState(epic.getId()); // обновим статус эпика
+        Epic oldEpic = epicMap.get(epic.getId());
+        oldEpic.setName(epic.getName());
+        oldEpic.setDescription(epic.getDescription());
         return epic.getId();
-    }
-
-    //методы обновления статуса
-    public Task setTaskUpdateStatus(Task task, TaskStatus taskStatus) {
-        if (task == null) {
-            return null;
-        }
-        task.setTaskStatus(taskStatus);
-        return task;
-    }
-
-    public Epic setEpicUpdateStatus(Epic epic, TaskStatus taskStatus) {
-        if (epic == null) {
-            return null;
-        }
-        epic.setTaskStatus(taskStatus);
-        return epic;
-    }
-
-    public Subtask setSubtaskUpdateStatus(Subtask subtask, TaskStatus taskStatus) {
-        if (subtask == null) {
-            return null;
-        }
-        subtask.setTaskStatus(taskStatus);
-        return subtask;
     }
 
     // рассчет статуса эпика
@@ -118,6 +92,7 @@ public class TaskManager {
         //по умолчанию статус NEW
         if (epic.getSubtaskIds().size() == 0) {
             epic.setTaskStatus(TaskStatus.NEW);
+            return;
         }
         //проверяем статусы подзадачь
         for (int subtaskId : epic.getSubtaskIds()) {
@@ -175,7 +150,7 @@ public class TaskManager {
 
     //удалим подзадачу
     public boolean removeSubtask(Integer id) {
-        Subtask subtask = subtaskMap.get(id);
+        Subtask subtask = subtaskMap.remove(id);
         if (subtask == null) {//не нашли подзадачу
             return false;
         }
@@ -185,24 +160,28 @@ public class TaskManager {
         }
         epic.getSubtaskIds().remove(id);
         checkEpicState(epic.getId());
-        Subtask task = subtaskMap.remove(id);
-        return (task != null);
+        return true;
     }
 
     public boolean removeEpic(Integer id) {
         Epic epic = epicMap.remove(id);
         if (epic != null) {
             for (int subtaskId : epic.getSubtaskIds()) {
-                removeSubtask(subtaskId);
+                subtaskMap.remove(subtaskId);
             }
         }
         return (epic != null);
     }
 
-    //удилим все подзадачи
+    //Удалим все подзадачи
+    //При удалении всех подзадач, удаление эпиков осуществлять - не требуется.
+    //Следует лишь пройтись по ним и почистить в них списки идентификаторов подзадач и обновить их статусы.
     public void removeAllSubtask() {
         subtaskMap.clear();
-        epicMap.clear();
+        for (Epic epic : epicMap.values()) {
+            epic.getSubtaskIds().clear();
+            epic.getTaskStatus();
+        }
     }
 
     public void removeAllEpic() {
@@ -210,24 +189,23 @@ public class TaskManager {
         subtaskMap.clear();
     }
 
-    public Task getTaskId(Integer id) {
-        return taskMap.get(id);
-    }
-
     public void removeAllTask() {
         taskMap.clear();
     }
 
-    public HashMap<Integer, Task> printTaskMap() {
-        return taskMap;
+    public ArrayList<Task> getPrintTaskMap() {
+        ArrayList<Task> tasks = new ArrayList<>(taskMap.values());
+        return tasks;
     }
 
-    public HashMap<Integer, Epic> printEpicMap() {
-        return epicMap;
+    public ArrayList<Epic> getPrintEpicMap() {
+        ArrayList<Epic> epics = new ArrayList<>(epicMap.values());
+        return epics;
     }
 
-    public HashMap<Integer, Subtask> printSubtaskMap() {
-        return subtaskMap;
+    public ArrayList<Subtask> getPrintSubtaskMap() {
+        ArrayList<Subtask> subtasks = new ArrayList<>(subtaskMap.values());
+        return subtasks;
     }
 
 

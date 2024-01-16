@@ -39,9 +39,9 @@ public class Main {
 
         //--
 
-        System.out.println(manager.printTaskMap());
-        System.out.println(manager.printEpicMap());
-        System.out.println(manager.printSubtaskMap());
+        System.out.println(manager.getPrintTaskMap());
+        System.out.println(manager.getPrintEpicMap());
+        System.out.println(manager.getPrintSubtaskMap());
 
 
     }

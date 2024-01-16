@@ -1,4 +1,4 @@
-package ru.yandex.app.service;
+package ru.yandex.app.model;
 
 public enum TaskType {
     TASK,
