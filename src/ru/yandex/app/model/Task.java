@@ -5,25 +5,26 @@ import ru.yandex.app.service.TaskType;
 
 import java.util.Objects;
 
+import static ru.yandex.app.service.TaskStatus.NEW;
+
 public class Task {
 
+    protected Integer id = 0;
     protected String name;
     protected String description;
-    protected Integer id;
-    protected TaskStatus taskStatus = TaskStatus.NEW;
+    protected TaskStatus taskStatus = NEW;
 
+    public Task() {
+    }
     public Task(String name, String description) {
         this.name = name;
         this.description = description;
     }
-
-    public Task(int id, String name, String description, TaskStatus taskStatus) {
-        this.id = id;
+    public Task(String name, String description, TaskStatus taskStatus) {
         this.name = name;
         this.description = description;
         this.taskStatus = taskStatus;
     }
-
 
     public String getName() {
         return name;
