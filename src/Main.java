@@ -1,6 +1,5 @@
 
 import ru.yandex.app.service.TaskManager;
-import ru.yandex.app.service.TaskStatus;
 import ru.yandex.app.model.Epic;
 import ru.yandex.app.model.Subtask;
 import ru.yandex.app.model.Task;

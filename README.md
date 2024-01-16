@@ -7,7 +7,7 @@ Repository for homework project.
        1. name(String) - Название, кратко описывающее суть задачи (например, «Переезд»).
        2. description(String) - Описание, в котором раскрываются детали.
        3. id(int) - Уникальный идентификационный номер задачи, по которому её можно будет найти.
-       4. taskStatus(ru.yandex.app.service.TaskStatus) - Статусы:
+       4. taskStatus(ru.yandex.app.model.TaskStatus) - Статусы:
              1. NEW — задача только создана, но к её выполнению ещё не приступили.
              2. IN_PROGRESS — над задачей ведётся работа.
              3. DONE — задача выполнена.

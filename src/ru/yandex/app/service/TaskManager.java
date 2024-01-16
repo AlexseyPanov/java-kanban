@@ -3,6 +3,7 @@ package ru.yandex.app.service;
 import ru.yandex.app.model.Epic;
 import ru.yandex.app.model.Subtask;
 import ru.yandex.app.model.Task;
+import ru.yandex.app.model.TaskStatus;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,10 +1,8 @@
 package ru.yandex.app.model;
 
-import ru.yandex.app.service.TaskStatus;
-
 import java.util.Objects;
 
-import static ru.yandex.app.service.TaskStatus.NEW;
+import static ru.yandex.app.model.TaskStatus.NEW;
 
 public class Task {
 

@@ -1,7 +1,5 @@
 package ru.yandex.app.model;
 
-import ru.yandex.app.service.TaskStatus;
-
 import java.util.ArrayList;
 import java.util.List;
 
