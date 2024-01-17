@@ -143,6 +143,22 @@ public class TaskManager {
         return epic;
     }
 
+    //метод получения всех подзадач эпика по его идентификатору
+    public ArrayList<Subtask> getSubtasksByEpicId(int epicId) {
+        ArrayList<Subtask> result = new ArrayList<>();
+        Epic epic = getEpic(epicId);
+        if (epic == null) {
+            return result;
+        }
+        for (int id : epic.getSubtaskIds()) {
+            Subtask subtask = getSubtask(id);
+            if (subtask != null) {
+                result.add(subtask);
+            }
+        }
+        return result;
+    }
+
     //удалим задачу
     public boolean removeTask(Integer id) {
         Task task = taskMap.remove(id);
@@ -181,7 +197,7 @@ public class TaskManager {
         subtaskMap.clear();
         for (Epic epic : epicMap.values()) {
             epic.getSubtaskIds().clear();
-            epic.getTaskStatus();
+            checkEpicState(epic.getId());
         }
     }
 
@@ -195,18 +211,15 @@ public class TaskManager {
     }
 
     public ArrayList<Task> getPrintTaskMap() {
-        ArrayList<Task> tasks = new ArrayList<>(taskMap.values());
-        return tasks;
+        return new ArrayList<>(taskMap.values());
     }
 
     public ArrayList<Epic> getPrintEpicMap() {
-        ArrayList<Epic> epics = new ArrayList<>(epicMap.values());
-        return epics;
+        return new ArrayList<>(epicMap.values());
     }
 
     public ArrayList<Subtask> getPrintSubtaskMap() {
-        ArrayList<Subtask> subtasks = new ArrayList<>(subtaskMap.values());
-        return subtasks;
+        return new ArrayList<>(subtaskMap.values());
     }
 
 
