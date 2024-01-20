@@ -43,9 +43,7 @@ public class Task {
         return taskStatus;
     }
 
-    public void setTaskStatus(TaskStatus taskStatus) {
-        this.taskStatus = taskStatus;
-    }
+    public void setTaskStatus(TaskStatus taskStatus) {}
 
     public int getId() {
         return id;
