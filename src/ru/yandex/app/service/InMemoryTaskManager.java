@@ -8,16 +8,21 @@ import ru.yandex.app.model.TaskStatus;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import static ru.yandex.app.model.TaskStatus.*;
+
+// Менеджер задачь для хранения задач в памяти
 public class InMemoryTaskManager implements TaskManager {
-
-    private int id = 0;
-    private HashMap<Integer, Task> taskMap = new HashMap<>();
-    private HashMap<Integer, Epic> epicMap = new HashMap<>();
-    private HashMap<Integer, Subtask> subtaskMap = new HashMap<>();
 
     // менеджер истории просмотров
     private final HistoryManager historyManagers = Managers.getDefaultHistory();
+    // счетчик
+    private static int id = 0;
+
+    private Map<Integer, Task> taskMap = new HashMap<>();
+    private Map<Integer, Epic> epicMap = new HashMap<>();
+    private Map<Integer, Subtask> subtaskMap = new HashMap<>();
 
     // получить новый ID
     private int getNextId() {
@@ -36,6 +41,22 @@ public class InMemoryTaskManager implements TaskManager {
         //Добавим в историю просмотров
         historyManagers.add(task);
         return task;
+    }
+
+    // список всех задачь
+    @Override
+    public List<Task> getAllTasks() {
+        return new ArrayList<>(taskMap.values());
+    }
+    // список всех эпиков
+    @Override
+    public List<Epic> getAllEpics() {
+        return new ArrayList<>(epicMap.values());
+    }
+    // список всех подзадачь
+    @Override
+    public List<Subtask> getAllSubtasks() {
+        return new ArrayList<>(subtaskMap.values());
     }
 
     // получить подзадачу по id
@@ -113,7 +134,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public long updateEpic(Epic epic) {
+    public int updateEpic(Epic epic) {
         if (epic == null) {
             return -1;
         }
@@ -167,10 +188,9 @@ public class InMemoryTaskManager implements TaskManager {
         }
     }
 
-
     //метод получения всех подзадач эпика по его идентификатору
     @Override
-    public ArrayList<Subtask> getSubtasksByEpicId(int epicId) {
+    public List<Subtask> getSubtasksByEpicId(int epicId) {
         ArrayList<Subtask> result = new ArrayList<>();
         Epic epic = epicMap.get(epicId);
         if (epic == null) {
@@ -236,24 +256,24 @@ public class InMemoryTaskManager implements TaskManager {
         epicMap.clear();
         subtaskMap.clear();
     }
-
+    // удалить все задачи
     @Override
     public void removeAllTask() {
         taskMap.clear();
     }
 
     @Override
-    public ArrayList<Task> getPrintTaskMap() {
+    public List<Task> getPrintTaskMap() {
         return new ArrayList<>(taskMap.values());
     }
 
     @Override
-    public ArrayList<Epic> getPrintEpicMap() {
+    public List<Epic> getPrintEpicMap() {
         return new ArrayList<>(epicMap.values());
     }
 
     @Override
-    public ArrayList<Subtask> getPrintSubtaskMap() {
+    public List<Subtask> getPrintSubtaskMap() {
         return new ArrayList<>(subtaskMap.values());
     }
 

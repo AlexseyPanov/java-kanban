@@ -21,12 +21,20 @@ public interface TaskManager {
     int addSubtask(Subtask subtask);
 
     //методы обновления
+    //обновим задачу
     int updateTask(Task task);
-
-    long updateEpic(Epic epic);
+    // обновим эпик
+    int updateEpic(Epic epic);
 
     // получить задачу по id
     Task getTask(Integer id);
+
+    // список всех задачь
+    List<Task> getAllTasks();
+    // список всех эпиков
+    List<Epic> getAllEpics();
+    // список всех подзадачь
+    List<Subtask> getAllSubtasks();
 
     // получить подзадачу по id
     Subtask getSubtask(Integer id);
@@ -35,7 +43,7 @@ public interface TaskManager {
     Epic getEpic(Integer id);
 
     //метод получения всех подзадач эпика по его идентификатору
-    ArrayList<Subtask> getSubtasksByEpicId(int epicId);
+    List<Subtask> getSubtasksByEpicId(int epicId);
 
     //удалим задачу
     boolean removeTask(Integer id);
@@ -54,9 +62,9 @@ public interface TaskManager {
 
     void removeAllTask();
 
-    ArrayList<Task> getPrintTaskMap();
+    List<Task> getPrintTaskMap();
 
-    ArrayList<Epic> getPrintEpicMap();
+    List<Epic> getPrintEpicMap();
 
-    ArrayList<Subtask> getPrintSubtaskMap();
+    List<Subtask> getPrintSubtaskMap();
 }

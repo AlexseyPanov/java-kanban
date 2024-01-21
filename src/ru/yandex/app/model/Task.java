@@ -6,23 +6,27 @@ import static ru.yandex.app.model.TaskStatus.NEW;
 
 public class Task {
 
-    protected Integer id = 0;
-    protected String name;
-    protected String description;
+    protected Integer id = 0;//идентификатор задачи
+    protected String name;//название задачи
+    protected String description;//описание задачи
     protected TaskStatus taskStatus = NEW;
 
+    //конструкторы
     public Task() {
     }
+
     public Task(String name, String description) {
         this.name = name;
         this.description = description;
     }
+
     public Task(String name, String description, TaskStatus taskStatus) {
         this.name = name;
         this.description = description;
         this.taskStatus = taskStatus;
     }
 
+    //методы get set
     public String getName() {
         return name;
     }
@@ -43,7 +47,9 @@ public class Task {
         return taskStatus;
     }
 
-    public void setTaskStatus(TaskStatus taskStatus) {}
+    public void setTaskStatus(TaskStatus taskStatus) {
+        this.taskStatus = taskStatus;
+    }
 
     public int getId() {
         return id;
@@ -53,7 +59,9 @@ public class Task {
         this.id = id;
     }
 
-    public TaskType getTaskType() { return TaskType.TASK; }
+    public TaskType getTaskType() {
+        return TaskType.TASK;
+    }
 
     @Override
     public boolean equals(Object o) {
