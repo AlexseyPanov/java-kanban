@@ -26,7 +26,7 @@ public class Task {
         this.taskStatus = taskStatus;
     }
 
-    //методы get set
+    //методы get и set
     public String getName() {
         return name;
     }
