@@ -26,7 +26,6 @@ class EpicTest {
         assertEquals("TV",epic.getName());
         epic.setName("new name");
         assertEquals("new name",epic.getName());
-
     }
     @Test
     void getDescription() {

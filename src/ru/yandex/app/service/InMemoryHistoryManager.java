@@ -2,33 +2,89 @@ package ru.yandex.app.service;
 
 import ru.yandex.app.model.Task;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
 // для хранения истории просмотров задач в памяти
 public class InMemoryHistoryManager implements HistoryManager {
     // список просмотров
-    private LinkedList<Task> history = new LinkedList<>();
-    // Лимит задач должен возвращать последние 10 просмотренных задач
-    private final int LIMIT_TASKS = 10;
+    Node history = null;
+    // ссылки на элементы истории по id
+    HashMap<Integer, Node> indexTask = new HashMap<>();
 
     @Override
     // добавить задачу
-    //TODO В следующем спринте вам нужно будет убрать дубли и расширить её размер
     public void add(Task task) {
         if (task == null) {
             return;
         }
-        //просмотренные задачи должны добавляться в конец.
-        if (history.size() >= LIMIT_TASKS) {
-            history.removeFirst();//Удаляет и возвращает первый элемент из этого списка.
-        }
-        history.add(task);
+        remove(task.getId());
+        Node node = linkLast(task);
+        indexTask.put(task.getId(), node);
     }
 
     @Override
-    // Список последних 10 просмотренных задач
+    // Список просмотренных задач
     public List<Task> getHistory() {
-        return history;
+        return getTasks();
+    }
+
+    @Override
+    public void remove(int id) {
+        if (indexTask.containsKey(id)) {
+            Node node = indexTask.get(id);
+            removeNode(node);
+            indexTask.remove(id);
+        }
+    }
+
+    /**
+     * добавить запись в конец списка
+     */
+    private Node linkLast(Task task) {
+        if (history == null) {
+            history = new Node(task);
+            history.setPrev(history);
+            history.setNext(history);
+            return history;
+        } else {
+            Node node = new Node(task);
+            node.setNext(history);
+            node.setPrev(history.getPrev());
+            history.getPrev().setNext(node);
+            history.setPrev(node);
+            return node;
+        }
+    }
+    /**
+     * получить историю в виде списка задач
+     */
+    private List<Task> getTasks() {
+        ArrayList<Task> res = new ArrayList<>();
+        if (history != null) {
+            Node node = history;
+            do {
+                res.add(node.getValue());
+                node = node.getNext();
+            } while (node != history);
+        }
+        return res;
+    }
+    /**
+     * удалить узел задачи из списка
+     */
+    private void removeNode(Node node) {
+        if (node == null) return;
+        if (node == history) {  // это первый элемент
+            // поправим ссылку на первый элемент списка
+            history = (history.getNext() != history) ? history.getNext() : null;
+        }
+        node.getPrev().setNext(node.getNext());
+        node.getNext().setPrev(node.getPrev());
+        node.setPrev(null);
+        node.setNext(null);
+        node.setValue(null);
     }
 }
