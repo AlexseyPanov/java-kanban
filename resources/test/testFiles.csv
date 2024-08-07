@@ -1,0 +1,5 @@
+id,type,name,status,description,epic
+7,TASK,"t1",NEW,"Задача 1",
+8,TASK,"t2",NEW,"Задача 2",
+9,EPIC,"E-001",NEW,"Эпик 1",
+10,EPIC,"E-002",NEW,"Эпик 2",

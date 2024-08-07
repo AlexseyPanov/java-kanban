@@ -23,4 +23,6 @@ public class HistoryManagerTest {
         assertNotNull(list);
         assertEquals(0, list.size());
     }
+
+
 }
