@@ -10,6 +10,7 @@ public class Task {
     protected String name;//название задачи
     protected String description;//описание задачи
     protected TaskStatus taskStatus = NEW;
+    protected TaskType taskType;
 
     //конструкторы
     public Task() {
@@ -24,6 +25,13 @@ public class Task {
         this.name = name;
         this.description = description;
         this.taskStatus = taskStatus;
+    }
+
+    public Task(String name, TaskType taskType, TaskStatus status, String description) {
+        this.taskType = taskType;
+        this.name = name;
+        this.description = description;
+        this.taskStatus = status;
     }
 
     //методы get и set
@@ -86,5 +94,10 @@ public class Task {
                 ", описание='" + description + '\'' +
                 ", id='" + id + '\'' +
                 ", статус='" + taskStatus + '\'';
+    }
+
+    public String getDescriptionTask(){
+        return getId() + "," + TaskType.TASK + "," + getName() + "," + getTaskStatus() + ","
+                + getDescription();
     }
 }

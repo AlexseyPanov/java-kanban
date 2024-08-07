@@ -28,7 +28,9 @@ public class InMemoryTaskManager implements TaskManager {
     private int getNextId() {
         return id++;
     }
-
+    protected void setId(int value) {
+        id = value;
+    }
     @Override
     public List<Task> getHistory() {
         return historyManagers.getHistory();
@@ -277,5 +279,16 @@ public class InMemoryTaskManager implements TaskManager {
         return new ArrayList<>(subtaskMap.values());
     }
 
-
+    protected HistoryManager getHistoryManager() {
+        return historyManagers;
+    }
+    // вернет задачу по ID
+    protected Task getById(long id){
+        Task task = taskMap.get(id);
+        if(task!=null) return task;
+        task = subtaskMap.get(id);
+        if(task!=null) return task;
+        task = epicMap.get(id);
+        return task;
+    }
 }
