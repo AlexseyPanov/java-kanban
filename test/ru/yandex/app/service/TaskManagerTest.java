@@ -333,6 +333,6 @@ class TaskManagerTest {
         manager.addSubtask(subTask2);
         manager.addSubtask(subTask3);
 
-        assertEquals(TaskStatus.NEW, epic.getTaskStatus());
+        assertEquals(TaskStatus.DONE, epic.getTaskStatus());
     }
 }

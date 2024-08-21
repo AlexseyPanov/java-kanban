@@ -7,6 +7,8 @@ import java.util.List;
 public interface HistoryManager {
     // добавить задачу в историю
     void add(Task task);
-    // последние 10 просмотренных задач
+    // просмотренные задачи
     List<Task> getHistory();
+    // удалить задачу по id
+    void remove(int id);
 }

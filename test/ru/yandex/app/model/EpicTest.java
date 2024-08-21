@@ -1,4 +1,4 @@
-package ru.yandex.app.model.model;
+package ru.yandex.app.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,7 +26,6 @@ class EpicTest {
         assertEquals("TV",epic.getName());
         epic.setName("new name");
         assertEquals("new name",epic.getName());
-
     }
     @Test
     void getDescription() {

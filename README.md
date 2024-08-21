@@ -1,7 +1,6 @@
 # java-kanban
 Repository for homework project.
 
-
 ### 1. Задача (англ. task). 
     Параметры:
        1. name(String) - Название, кратко описывающее суть задачи (например, «Переезд»).
